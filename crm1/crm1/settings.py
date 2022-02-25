@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'accounts',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ] 
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
