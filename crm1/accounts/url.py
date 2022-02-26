@@ -15,7 +15,16 @@ urlpatterns = [
     
     path('delete_order/<str:pk>/', views.deleteOrder, name="delete_order"),
     
-    path('user/', views.userPage,name='user'),
+    path('user/', views.userPage,name="user"),
+    
+    
+    path('account/', views.accountSettings, name="account"),
+    
+    
+    
+    path('products/delete/<str:pk>/', views.product_delete, name='dashboard-products-delete'),
+    path('products/edit/<str:pk>/', views.product_edit, name='dashboard-products-edit'),
+   
     
     path('login/',views.loginPage, name="login"),
     path('register/',views.register, name="register"),
