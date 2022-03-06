@@ -243,12 +243,14 @@ def product_delete(request, pk):
     return render(request, 'accounts/products_delete.html', context)
 
 
-
+@login_required(login_url='login')
 def prediction(request):
     
    
     return render(request, "accounts/prediction.html")
 
+
+@login_required(login_url='login')
 def result(request):
    
     from .DecisionTree import DecisionTreeRegressor,Node
