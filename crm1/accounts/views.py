@@ -134,7 +134,7 @@ def createOrder(request,pk):
     if group =='admin':
         OrderFormSet =  inlineformset_factory(Customer, Order, fields=('product','status'),extra=10)
     else:
-        OrderFormSet =  inlineformset_factory(Customer, Order, fields=('product','note'),can_delete=False,extra=4)
+        OrderFormSet =  inlineformset_factory(Customer, Order, fields=('product','quantity'),can_delete=False,extra=4)
     
     customer = Customer.objects.get(id=pk)
     
