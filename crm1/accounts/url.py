@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.urls import path
 from . import views
 
@@ -30,7 +31,8 @@ urlpatterns = [
     path('register/',views.register, name="register"),
     path('logout/',views.logoutUser,name='logout'),
     
-    
+    path('predict/', views.prediction, name="predict"),
+    path('result/', views.result, name="result")
 ]
 
 

@@ -1,13 +1,16 @@
+from pyexpat import model
 from tokenize import group
+from django import urls
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate,login,logout
+from matplotlib.style import context
 
 from .models import *
-from .forms import CustomerForm, OrderForm, CreateUserForm, ProductForm
+from .forms import CustomerForm, OrderForm, CreateUserForm,ProductForm
 
 from .filters import OrderFilter
 
@@ -15,6 +18,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
 from .decorators import allowed_users, unauthenticated_user, admin_only
+
+import pickle
+import numpy as np
+
+from .DecisionTree import DecisionTreeRegressor,Node
+
+
 
 
 
@@ -231,3 +241,35 @@ def product_delete(request, pk):
         'item': item
     }
     return render(request, 'accounts/products_delete.html', context)
+
+
+
+def prediction(request):
+    
+   
+    return render(request, "accounts/prediction.html")
+
+def result(request):
+   
+    from .DecisionTree import DecisionTreeRegressor,Node
+    veg = request.GET.get('vegetable')
+    print(veg)
+    if veg=="Potato":
+        model = pickle.load(open('static/tmodels/Potato.pkl','rb'))
+    elif veg=="Tomato":
+        model = pickle.load(open('static/tmodels/Tomato.pkl','rb'))
+    elif veg=="Onion":
+        model = pickle.load(open('static/tmodels/Onion.pkl','rb'))
+    elif veg=="Cauli":
+        model = pickle.load(open('static/tmodels/Cauli.pkl','rb'))
+    
+    day = int(request.GET['day'])
+    month = int(request.GET['month'])
+    year = int(request.GET['year'])
+    arr = np.array([[day,month,year]])
+    output = model.predict(arr)
+    print(output[0])
+    context={
+        'output':round(output[0])
+    }
+    return render(request, "accounts/result.html",context)

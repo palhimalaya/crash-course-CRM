@@ -33,4 +33,8 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
                 
-        
+class PredictForm(forms.Form):
+    
+    day = forms.CharField()
+    month = forms.CharField()
+    year = forms.CharField()

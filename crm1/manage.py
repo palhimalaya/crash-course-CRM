@@ -19,4 +19,10 @@ def main():
 
 
 if __name__ == '__main__':
+    
+    from DecisionTree import DecisionTreeRegressor,Node
+    
+    
+    DecisionTreeRegressor
+    
     main()
