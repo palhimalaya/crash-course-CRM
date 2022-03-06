@@ -28,9 +28,9 @@ class Tag(models.Model):
 
 class Product(models.Model):
     CATEGORY = (
-    ('Stationary', 'Stationary'),
-    ('Electronics', 'Electronics'),
-    ('Food', 'Food'),
+    ('Vegetables', 'Vegetables'),
+    ('Fruits', 'Fruits'),
+    ('Crops', 'Crops'),
     )
 
     
@@ -55,7 +55,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete= models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS, default='Pending')
-    note = models.CharField(max_length=100, null=True)
+    quantity = models.CharField(max_length=100, null=True)
     
     def __str__(self):
         return self.product.name
